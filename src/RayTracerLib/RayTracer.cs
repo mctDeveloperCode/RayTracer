@@ -1,8 +1,6 @@
-﻿using System.Drawing;
-using System.Drawing.Imaging;
 
 namespace RayTracer;
-public class RayTracer
+public sealed class RayTracer
 {
     public Bitmap Render()
     {

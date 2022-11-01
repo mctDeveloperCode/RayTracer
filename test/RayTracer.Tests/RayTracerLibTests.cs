@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace RayTracer.Tests;
 
-public class RayTracerLibTests
+public sealed class RayTracerLibTests
 {
     [Fact]
     public void EmptySceneShouldBeBlack()
@@ -18,14 +18,14 @@ public class RayTracerLibTests
         Assert.Equal(width, bitmap.Width);
         Assert.Equal(height, bitmap.Height);
 
-        var expectedColorArgb = Color.Black.ToArgb();
+        var expectedColor = Color.Black;
 
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
                 var actualColor = bitmap.GetPixel(x, y);
-                Assert.Equal(expectedColorArgb, actualColor.ToArgb());
+                Assert.Equal(expectedColor, actualColor);
             }
         }
     }

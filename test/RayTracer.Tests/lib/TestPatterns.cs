@@ -14,17 +14,17 @@ internal static class TestPatterns
         {
             for (int y = 0; y < rows; y++)
             {
-                int g = Calc(x, cols);
-                int b = Calc(y, rows);
+                byte g = Calc(x, cols);
+                byte b = Calc(y, rows);
 
-                int r = g > b ? g : b;
+                byte r = g > b ? g : b;
 
-                bitmap.SetPixel(x, y, Color.FromArgb(r, g, b));
+                bitmap.SetPixel(x, y, new Color(r, g, b));
             }
         }
         return bitmap;
 
-        int Calc(int value, int scale) =>
-            (int) (((double) value / scale) * 256);
+        byte Calc(int value, int scale) =>
+            (byte) (((double) value / scale) * 256);
     }
 }
