@@ -8,7 +8,7 @@ internal static class TestPatterns
     {
         int rows = size;
         int cols = size;
-        Bitmap bitmap = new (cols, rows);
+        Bitmap bitmap = new (rows, cols);
 
         for (int x = 0; x < cols; x++)
         {

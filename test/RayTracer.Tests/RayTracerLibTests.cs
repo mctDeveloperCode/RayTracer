@@ -15,8 +15,8 @@ public sealed class RayTracerLibTests
 
         Bitmap bitmap = rayTracer.Render();
 
-        Assert.Equal(width, bitmap.Width);
-        Assert.Equal(height, bitmap.Height);
+        Assert.Equal(width, bitmap.Columns);
+        Assert.Equal(height, bitmap.Rows);
 
         var expectedColor = Color.Black;
 

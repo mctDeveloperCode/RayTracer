@@ -3,15 +3,15 @@ namespace RayTracer;
 
 public sealed class Bitmap
 {
-    public Bitmap(int width, int height)
+    public Bitmap(int rows, int columns)
     {
-        Width = width;
-        Height = height;
-        frame = new Color [width, height];
+        Columns = columns;
+        Rows = rows;
+        frame = new Color [columns, rows];
     }
 
-    public int Width { get; }
-    public int Height { get; }
+    public int Columns { get; }
+    public int Rows { get; }
 
     public void SetPixel(int x, int y, Color argb) =>
         frame[x, y] = argb;
