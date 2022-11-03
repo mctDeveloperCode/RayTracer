@@ -10,6 +10,6 @@ internal sealed class Camera
         yield return Axis;
     }
 
-    // The centerline of the camera
+    // Centerline of the camera
     private Ray Axis { get; }
 }

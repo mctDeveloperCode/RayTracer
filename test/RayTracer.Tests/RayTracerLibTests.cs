@@ -39,7 +39,8 @@ public sealed class RayTracerLibTests
     [MemberData(nameof(ShouldCastSingleRayPerPixelData))]
     internal void ShouldCastSingleRayPerPixel(IEnumerable<Ray> expected)
     {
-        Camera camera = new (new Ray(Vector.Origin, Vector.XBasis));
+        Ray cameraAxis = new Ray(Vector.Origin, Vector.XBasis);
+        Camera camera = new (cameraAxis);
 
         IEnumerable<Ray> actual = camera.Rays();
 
