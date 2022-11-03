@@ -5,7 +5,7 @@ namespace RayTracer.Tests;
 public sealed class RayTests
 {
     [Fact]
-    public void XAxinTest()
+    public void XAxisShouldBeXAxis()
     {
         Ray expected = new Ray(Vector.Origin, Vector.XBasis);
         Ray actual = Ray.XAxis;
@@ -13,7 +13,7 @@ public sealed class RayTests
     }
 
     [Fact]
-    public void YAxinTest()
+    public void YAxisShouldBeYAxis()
     {
         Ray expected = new Ray(Vector.Origin, Vector.YBasis);
         Ray actual = Ray.YAxis;
@@ -21,7 +21,7 @@ public sealed class RayTests
     }
 
     [Fact]
-    public void ZAxinTest()
+    public void ZAxisShouldBeZAxis()
     {
         Ray expected = new Ray(Vector.Origin, Vector.ZBasis);
         Ray actual = Ray.ZAxis;

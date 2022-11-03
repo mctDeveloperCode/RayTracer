@@ -14,7 +14,7 @@ public sealed class VectorTests
     [InlineData(4.0, 0.0, 3.0, 5.0)]
     [InlineData(2.0, 3.0, 6.0, 7.0)]
     [InlineData(1.0, 1.0, 1.0, 1.7320508075688772)]
-    public void LengthTest(double x, double y, double z, double expected)
+    public void LengthShouldBeCorrect(double x, double y, double z, double expected)
     {
         Vector vector = new (x, y, z);
         double actual = vector.Length;
@@ -31,7 +31,7 @@ public sealed class VectorTests
     [InlineData(4.0, 0.0, 3.0, 25.0)]
     [InlineData(2.0, 3.0, 6.0, 49.0)]
     [InlineData(1.0, 1.0, 1.0, 3.0)]
-    public void Length2Test(double x, double y, double z, double expected)
+    public void LengthSquaredShouldBeCorrect(double x, double y, double z, double expected)
     {
         Vector vector = new (x, y, z);
         double actual = vector.Length2;
@@ -43,7 +43,7 @@ public sealed class VectorTests
     [InlineData(1.0, 0.0, 0.0, 1.0)]
     [InlineData(0.0, 1.0, 0.0, 1.0)]
     [InlineData(0.0, 0.0, 1.0, 1.0)]
-    public void UnitVectorTest(double x, double y, double z, double length)
+    public void UnitVectorShouldBeCorrect(double x, double y, double z, double length)
     {
         Vector expected = new (x / length, y / length, z / length);
 
@@ -56,7 +56,7 @@ public sealed class VectorTests
 
 
     [Fact]
-    public void OriginTest()
+    public void OriginShouldBeOrigin()
     {
         Vector expected = new Vector(0.0, 0.0, 0.0);
         Vector actual = Vector.Origin;
@@ -64,7 +64,7 @@ public sealed class VectorTests
     }
 
     [Fact]
-    public void XBasisTest()
+    public void XBasisShouldBeXBasis()
     {
         Vector expected = new Vector(1.0, 0.0, 0.0);
         Vector actual = Vector.XBasis;
@@ -72,7 +72,7 @@ public sealed class VectorTests
     }
 
     [Fact]
-    public void YBasisTest()
+    public void YBasisShouldBeYBasis()
     {
         Vector expected = new Vector(0.0, 1.0, 0.0);
         Vector actual = Vector.YBasis;
@@ -80,7 +80,7 @@ public sealed class VectorTests
     }
 
     [Fact]
-    public void ZBasisTest()
+    public void ZBasisShouldBeZBasis()
     {
         Vector expected = new Vector(0.0, 0.0, 1.0);
         Vector actual = Vector.ZBasis;
@@ -88,7 +88,7 @@ public sealed class VectorTests
     }
 
     [Fact]
-    public void OperatorVectorTimesInt()
+    public void OperatorVectorTimesIntShouldScaleVector()
     {
         Vector lhs = new (1.0, 2.0, 3.0);
         int rhs = 2;
@@ -100,7 +100,7 @@ public sealed class VectorTests
     }
 
     [Fact]
-    public void OperatorIntTimesVector()
+    public void OperatorIntTimesVectorShouldScaleVector()
     {
         int lhs = 2;
         Vector rhs = new (1.0, 2.0, 3.0);
@@ -112,7 +112,7 @@ public sealed class VectorTests
     }
 
     [Fact]
-    public void OperatorPlusTest()
+    public void OperatorPlusTestShouldSumVectors()
     {
         Vector lhs = new (1.0, 2.0, 3.0);
         Vector rhs = new (4.0, 5.0, 6.0);
@@ -124,7 +124,7 @@ public sealed class VectorTests
     }
 
     [Fact]
-    public void OperatorMinusTest()
+    public void OperatorMinusShouldFindVectorDiffference()
     {
         Vector lhs = new (6.0, 5.0, 4.0);
         Vector rhs = new (1.0, 2.0, 3.0);
