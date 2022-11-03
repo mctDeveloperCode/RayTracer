@@ -90,10 +90,10 @@ public sealed class VectorTests
     [Fact]
     public void OperatorVectorTimesIntShouldScaleVector()
     {
-        Vector lhs = new (1.0, 2.0, 3.0);
-        int rhs = 2;
+        Vector vector = new (1.0, 2.0, 3.0);
+        int i = 2;
 
-        Vector actual = lhs * rhs;
+        Vector actual = vector * i;
         Vector expected = new (2.0, 4.0, 6.0);
 
         MathAssert.Equal(expected, actual);
@@ -102,10 +102,34 @@ public sealed class VectorTests
     [Fact]
     public void OperatorIntTimesVectorShouldScaleVector()
     {
-        int lhs = 2;
-        Vector rhs = new (1.0, 2.0, 3.0);
+        int i = 2;
+        Vector vector = new (1.0, 2.0, 3.0);
 
-        Vector actual = lhs * rhs;
+        Vector actual = i * vector;
+        Vector expected = new (2.0, 4.0, 6.0);
+
+        MathAssert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void OperatorVectorTimesDoubleShouldScaleVector()
+    {
+        Vector vector = new (1.0, 2.0, 3.0);
+        double d = 2.0;
+
+        Vector actual = vector * d;
+        Vector expected = new (2.0, 4.0, 6.0);
+
+        MathAssert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void OperatorDoubleTimesVectorShouldScaleVector()
+    {
+        double d = 2.0;
+        Vector vector = new (1.0, 2.0, 3.0);
+
+        Vector actual = d * vector;
         Vector expected = new (2.0, 4.0, 6.0);
 
         MathAssert.Equal(expected, actual);
@@ -131,6 +155,18 @@ public sealed class VectorTests
 
         Vector actual = lhs - rhs;
         Vector expected = new (5.0, 3.0, 1.0);
+
+        MathAssert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void OperatorStarShouldFindDotProduct()
+    {
+        Vector lhs = new (6.0, 5.0, 4.0);
+        Vector rhs = new (1.0, 2.0, 3.0);
+
+        double actual = lhs * rhs;
+        double expected = 28.0;
 
         MathAssert.Equal(expected, actual);
     }

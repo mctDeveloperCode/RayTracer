@@ -18,10 +18,20 @@ internal struct Vector
     public Vector Unit() =>
         new Vector(X / Length, Y / Length, Z / Length);
 
+    // Dot product
+    public static double operator *(Vector lhs, Vector rhs) =>
+        lhs.X * rhs.X + lhs.Y * rhs.Y + lhs.Z * rhs.Z;
+
     public static Vector operator *(Vector vector, int scale) =>
         new Vector(vector.X * scale, vector.Y * scale, vector.Z * scale);
 
     public static Vector operator *(int scale, Vector vector) =>
+        new Vector(vector.X * scale, vector.Y * scale, vector.Z * scale);
+
+    public static Vector operator *(Vector vector, double scale) =>
+        new Vector(vector.X * scale, vector.Y * scale, vector.Z * scale);
+
+    public static Vector operator *(double scale, Vector vector) =>
         new Vector(vector.X * scale, vector.Y * scale, vector.Z * scale);
 
     public static Vector operator +(Vector lhs, Vector rhs) =>
