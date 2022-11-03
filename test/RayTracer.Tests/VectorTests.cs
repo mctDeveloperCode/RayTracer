@@ -86,4 +86,52 @@ public sealed class VectorTests
         Vector actual = Vector.ZBasis;
         MathAssert.Equal(expected, actual);
     }
+
+    [Fact]
+    public void OperatorVectorTimesInt()
+    {
+        Vector lhs = new (1.0, 2.0, 3.0);
+        int rhs = 2;
+
+        Vector actual = lhs * rhs;
+        Vector expected = new (2.0, 4.0, 6.0);
+
+        MathAssert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void OperatorIntTimesVector()
+    {
+        int lhs = 2;
+        Vector rhs = new (1.0, 2.0, 3.0);
+
+        Vector actual = lhs * rhs;
+        Vector expected = new (2.0, 4.0, 6.0);
+
+        MathAssert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void OperatorPlusTest()
+    {
+        Vector lhs = new (1.0, 2.0, 3.0);
+        Vector rhs = new (4.0, 5.0, 6.0);
+
+        Vector actual = lhs + rhs;
+        Vector expected = new (5.0, 7.0, 9.0);
+
+        MathAssert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void OperatorMinusTest()
+    {
+        Vector lhs = new (6.0, 5.0, 4.0);
+        Vector rhs = new (1.0, 2.0, 3.0);
+
+        Vector actual = lhs - rhs;
+        Vector expected = new (5.0, 3.0, 1.0);
+
+        MathAssert.Equal(expected, actual);
+    }
 }

@@ -18,6 +18,18 @@ internal struct Vector
     public Vector Unit() =>
         new Vector(X / Length, Y / Length, Z / Length);
 
+    public static Vector operator *(Vector vector, int scale) =>
+        new Vector(vector.X * scale, vector.Y * scale, vector.Z * scale);
+
+    public static Vector operator *(int scale, Vector vector) =>
+        new Vector(vector.X * scale, vector.Y * scale, vector.Z * scale);
+
+    public static Vector operator +(Vector lhs, Vector rhs) =>
+     new Vector(lhs.X + rhs.X, lhs.Y + rhs.Y, lhs.Z + rhs.Z);
+
+    public static Vector operator -(Vector lhs, Vector rhs) =>
+     new Vector(lhs.X - rhs.X, lhs.Y - rhs.Y, lhs.Z - rhs.Z);
+
     public static Vector Origin { get; } = new Vector(0.0, 0.0, 0.0);
     public static Vector XBasis { get; } = new Vector(1.0, 0.0, 0.0);
     public static Vector YBasis { get; } = new Vector(0.0, 1.0, 0.0);
