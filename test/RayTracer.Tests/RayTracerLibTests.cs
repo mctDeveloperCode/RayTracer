@@ -1,5 +1,5 @@
 using Xunit;
-using System.Drawing;
+using System.Collections.Generic;
 
 namespace RayTracer.Tests;
 
@@ -28,5 +28,21 @@ public sealed class RayTracerLibTests
                 Assert.Equal(expectedColor, actualColor);
             }
         }
+    }
+
+    private static IEnumerable<object []> ShouldCastSingleRayPerPixelData()
+    {
+        yield return new object [] { new Ray [] { new (Vector.Origin, Vector.XBasis) } };
+    }
+
+    [Theory]
+    [MemberData(nameof(ShouldCastSingleRayPerPixelData))]
+    internal void ShouldCastSingleRayPerPixel(IEnumerable<Ray> expected)
+    {
+        Camera camera = new (new Ray(Vector.Origin, Vector.XBasis));
+
+        IEnumerable<Ray> actual = camera.Rays();
+
+        Assert.Equal(expected, actual);
     }
 }
