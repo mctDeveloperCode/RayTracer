@@ -18,7 +18,7 @@ public sealed class VectorTests
     {
         Vector vector = new (x, y, z);
         double actual = vector.Length;
-        Equal(expected, actual);
+        MathAssert.Equal(expected, actual);
     }
 
     [Theory]
@@ -35,7 +35,7 @@ public sealed class VectorTests
     {
         Vector vector = new (x, y, z);
         double actual = vector.Length2;
-        Equal(expected, actual);
+        MathAssert.Equal(expected, actual);
     }
 
     [Theory]
@@ -50,8 +50,8 @@ public sealed class VectorTests
         Vector vector = new (x, y, z);
         Vector actual = vector.Unit();
 
-        Equal(expected, actual);
-        Equal(1.0, actual.Length);
+        MathAssert.Equal(expected, actual);
+        MathAssert.Equal(1.0, actual.Length);
     }
 
 
@@ -60,7 +60,7 @@ public sealed class VectorTests
     {
         Vector expected = new Vector(0.0, 0.0, 0.0);
         Vector actual = Vector.Origin;
-        Equal(expected, actual);
+        MathAssert.Equal(expected, actual);
     }
 
     [Fact]
@@ -68,7 +68,7 @@ public sealed class VectorTests
     {
         Vector expected = new Vector(1.0, 0.0, 0.0);
         Vector actual = Vector.XBasis;
-        Equal(expected, actual);
+        MathAssert.Equal(expected, actual);
     }
 
     [Fact]
@@ -76,7 +76,7 @@ public sealed class VectorTests
     {
         Vector expected = new Vector(0.0, 1.0, 0.0);
         Vector actual = Vector.YBasis;
-        Equal(expected, actual);
+        MathAssert.Equal(expected, actual);
     }
 
     [Fact]
@@ -84,18 +84,6 @@ public sealed class VectorTests
     {
         Vector expected = new Vector(0.0, 0.0, 1.0);
         Vector actual = Vector.ZBasis;
-        Equal(expected, actual);
-    }
-
-    private const int precision = 15;
-
-    private void Equal(double expected, double actual) =>
-        Assert.Equal(expected, actual, precision);
-
-    private void Equal(Vector expected, Vector actual)
-    {
-        Assert.Equal(expected.X, actual.X, precision);
-        Assert.Equal(expected.Y, actual.Y, precision);
-        Assert.Equal(expected.Z, actual.Z, precision);
+        MathAssert.Equal(expected, actual);
     }
 }
