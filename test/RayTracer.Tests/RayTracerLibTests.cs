@@ -30,20 +30,19 @@ public sealed class RayTracerLibTests
         }
     }
 
-    private static IEnumerable<object []> ShouldCastSingleRayPerPixelData()
+    [Fact]
+    internal void ShouldCastSingleRayPerPixel()
     {
-        yield return new object [] { new Ray [] { new (Vector.Origin, Vector.XBasis) } };
-    }
+        // Point of view
+        Ray pov = new (Vector.Origin, Vector.XBasis);
 
-    [Theory]
-    [MemberData(nameof(ShouldCastSingleRayPerPixelData))]
-    internal void ShouldCastSingleRayPerPixel(IEnumerable<Ray> expected)
-    {
-        Ray cameraAxis = new Ray(Vector.Origin, Vector.XBasis);
-        Camera camera = new (cameraAxis);
+        // Frame
+        Vector up = new (1.0, 0.0, 1.0);
+        double width = 0.1;
+        double height = 0.1;
+        int rows = 1;
+        int columns = 1;
 
-        IEnumerable<Ray> actual = camera.Rays();
-
-        Assert.Equal(expected, actual);
+        Camera camera = new (pov, up, width, height, rows, columns);
     }
 }

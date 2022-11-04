@@ -2,14 +2,54 @@ namespace RayTracer;
 
 internal sealed class Camera
 {
-    public Camera(Ray axis) =>
-        Axis = axis;
+    public Camera(Ray pointOfView, Vector frameUp, double width, double height, int rows, int columns)
+    {
+        this.pointOfView = pointOfView;
+
+        this.rows = rows;
+        this.columns = columns;
+
+        Vector frameCenter = pointOfView.Nearest(frameUp);
+        Vector frameYBasis = (frameUp - frameCenter).Unit();
+        Vector frameXBasis = pointOfView.Direction.Cross(frameYBasis);
+
+        double pixelWidth = width / columns;
+        double pixelHeight = height / rows;
+
+        yStep = -frameYBasis * pixelHeight;
+        xStep = frameXBasis * pixelWidth;
+
+        upperLeft = frameCenter;
+        upperLeft += frameYBasis * (height * 0.5);
+        upperLeft -= frameXBasis * (width * 0.5);
+        upperLeft += xStep * 0.5;
+        upperLeft += yStep * 0.5;
+    }
 
     public IEnumerable<Ray> Rays()
     {
-        yield return Axis;
+        foreach (Vector pixelCenter in PixelCenters())
+            yield return new Ray(pointOfView.Position, (pixelCenter - pointOfView.Position));
     }
 
-    // Centerline of the camera
-    private Ray Axis { get; }
+    private IEnumerable<Vector> PixelCenters()
+    {
+        for (int x = 0; x < columns; x++)
+            for (int y = 0; y < rows; y++)
+                yield return xStep * x + yStep * y + upperLeft;
+    }
+
+    // Perspective of the camera
+    private Ray pointOfView;
+
+    // Number of pixels
+    private int rows;
+    private int columns;
+
+    // Move by exactly one pixel
+    private Vector xStep;
+    private Vector yStep;
+
+    // The center of the upper left pixel in the frame
+    private Vector upperLeft;
 }
