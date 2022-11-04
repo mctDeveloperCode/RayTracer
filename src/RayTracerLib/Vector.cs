@@ -44,4 +44,7 @@ internal struct Vector
     public static Vector XBasis { get; } = new Vector(1.0, 0.0, 0.0);
     public static Vector YBasis { get; } = new Vector(0.0, 1.0, 0.0);
     public static Vector ZBasis { get; } = new Vector(0.0, 0.0, 1.0);
+
+    public override string ToString() =>
+        $"Vector({X}, {Y}, {Z})";
 }
