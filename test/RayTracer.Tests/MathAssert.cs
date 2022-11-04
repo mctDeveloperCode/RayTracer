@@ -15,6 +15,9 @@ internal static class MathAssert
     public static void Equal(Ray expected, Ray actual) =>
         Assert.Equal(expected, actual, rayEqualityComparer);
 
+    public static void Equal(IEnumerable<Ray> expected, IEnumerable<Ray> actual) =>
+        Assert.Equal(expected, actual, rayEqualityComparer);
+
     private static readonly VectorEqualityComparer vectorEqualityComparer = new ();
     private static readonly RayEqualityComparer rayEqualityComparer = new ();
 

@@ -44,5 +44,10 @@ public sealed class RayTracerLibTests
         int columns = 1;
 
         Camera camera = new (pov, up, width, height, rows, columns);
+
+        IEnumerable<Ray> expected = new Ray [] { new Ray(Vector.Origin, Vector.XBasis) };
+        IEnumerable<Ray> actual = camera.Rays();
+
+        MathAssert.Equal(expected, actual);
     }
 }
