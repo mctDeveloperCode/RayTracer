@@ -18,6 +18,12 @@ internal struct Vector
     public Vector Unit() =>
         new Vector(X / Length, Y / Length, Z / Length);
 
+    public Vector Cross(Vector rhs) =>
+        new Vector(
+            this.Y * rhs.Z - this.Z * rhs.Y,
+            this.Z * rhs.X - this.X * rhs.Z,
+            this.X * rhs.Y - this.Y * rhs.X);
+
     // Dot product
     public static double operator *(Vector lhs, Vector rhs) =>
         lhs.X * rhs.X + lhs.Y * rhs.Y + lhs.Z * rhs.Z;
@@ -39,6 +45,9 @@ internal struct Vector
 
     public static Vector operator -(Vector lhs, Vector rhs) =>
      new Vector(lhs.X - rhs.X, lhs.Y - rhs.Y, lhs.Z - rhs.Z);
+
+     public static Vector operator -(Vector vector) =>
+        new Vector(-vector.X, -vector.Y, -vector.Z);
 
     public static Vector Origin { get; } = new Vector(0.0, 0.0, 0.0);
     public static Vector XBasis { get; } = new Vector(1.0, 0.0, 0.0);

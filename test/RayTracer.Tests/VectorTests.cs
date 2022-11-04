@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Xunit;
 
 namespace RayTracer.Tests;
@@ -168,6 +169,56 @@ public sealed class VectorTests
         double actual = lhs * rhs;
         double expected = 28.0;
 
+        MathAssert.Equal(expected, actual);
+    }
+
+    [Fact]
+    internal void OperatorUnaryMinusShouldReverseDirection()
+    {
+        Vector vector = new Vector(1.0, 2.0, 3.0);
+        Vector actual = -vector;
+        Vector expected = new Vector(-1.0, -2.0, -3.0);
+        MathAssert.Equal(expected, actual);
+    }
+
+    internal static IEnumerable<object[]> CrossProductShouldBeCorrectData()
+    {
+        yield return new object []
+            { Vector.XBasis, Vector.YBasis, Vector.ZBasis };
+
+        yield return new object []
+            { Vector.YBasis, Vector.ZBasis, Vector.XBasis };
+
+        yield return new object []
+            { Vector.ZBasis, Vector.XBasis, Vector.YBasis };
+
+        yield return new object []
+            { Vector.YBasis, Vector.XBasis, -Vector.ZBasis };
+
+        yield return new object []
+            { Vector.ZBasis, Vector.YBasis, -Vector.XBasis };
+
+        yield return new object []
+            { Vector.XBasis, Vector.ZBasis, -Vector.YBasis };
+
+        yield return new object []
+            { Vector.XBasis * 2.0, Vector.YBasis, Vector.ZBasis * 2.0 };
+
+        yield return new object []
+            { Vector.YBasis, Vector.ZBasis * 3.0, Vector.XBasis * 3.0 };
+
+        yield return new object []
+            { Vector.ZBasis * 2.0, Vector.XBasis * 3.0, Vector.YBasis * 6.0 };
+
+        yield return new object []
+            { new Vector(1.0, -2.0, 3.0), new Vector(-4.0, 5.0, -6.0), new Vector(-3.0, -6.0, -3.0) };
+    }
+
+    [Theory]
+    [MemberData(nameof(CrossProductShouldBeCorrectData))]
+    internal void CrossProductShouldBeCorrect(Vector lhs, Vector rhs, Vector expected)
+    {
+        Vector actual = lhs.Cross(rhs);
         MathAssert.Equal(expected, actual);
     }
 }
