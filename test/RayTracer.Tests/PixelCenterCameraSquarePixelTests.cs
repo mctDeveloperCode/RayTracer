@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RayTracer.Tests;
 
-public sealed class PixelCenterCameraTests
+public sealed class PixelCenterCameraSquarePixelTests
 {
     [Theory]
     [MemberData(nameof(SquarePixelTestData))]
