@@ -6,14 +6,14 @@ namespace RayTracer.Tests;
 public sealed class PixelCenterCameraTests
 {
     [Theory]
-    [MemberData(nameof(SquarePixelTestData))]
-    internal void SquarePixelTest(int rows, int columns, IEnumerable<Ray> expected)
+    [MemberData(nameof(PixelTestData))]
+    internal void PixelTest(int rows, int columns, double width, double height, IEnumerable<Ray> expected)
     {
         Camera camera = new (
             pointOfView: new Ray(focus, -Vector.ZBasis),
             frameUp: Vector.YBasis,
-            width: 0.2,
-            height: 0.2,
+            width: width,
+            height: height,
             rows: rows,
             columns: columns);
 
@@ -22,7 +22,7 @@ public sealed class PixelCenterCameraTests
         MathAssert.Equal(expected, actual);
     }
 
-    private static IEnumerable<object[]> SquarePixelTestData() =>
+    private static IEnumerable<object[]> PixelTestData() =>
         new object[][]
         {
             expectedSquare1By1,
@@ -36,6 +36,7 @@ public sealed class PixelCenterCameraTests
     private static object[] expectedSquare1By1 =
     {
         1, 1,      // rows, columns
+        0.2, 0.2,  // width, height
         new Ray[]  // expected
         {
             new Ray(focus, -Vector.ZBasis)
@@ -45,6 +46,7 @@ public sealed class PixelCenterCameraTests
     private static object[] expectedSquare1By2 =
     {
         1, 2,      // rows, columns
+        0.2, 0.2,  // width, height
         new Ray[]  // expected
         {
             new Ray(focus, new Vector(-0.05, 0.0, -1.0)),
@@ -55,6 +57,7 @@ public sealed class PixelCenterCameraTests
     private static object[] expectedSquare2By1 =
     {
         2, 1,      // rows, columns
+        0.2, 0.2,  // width, height
         new Ray[]  // expected
         {
             new Ray(focus, new Vector(0.0,  0.05, -1.0)),
@@ -65,6 +68,7 @@ public sealed class PixelCenterCameraTests
     private static object[] expectedSquare2By2 =
     {
         2, 2,      // rows, columns
+        0.2, 0.2,  // width, height
         new Ray[]  // expected
         {
             new Ray(focus, new Vector(-0.05,  0.05, -1.0)),
