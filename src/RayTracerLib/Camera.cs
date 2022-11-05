@@ -19,11 +19,13 @@ internal sealed class Camera
         yStep = -frameYBasis * pixelHeight;
         xStep = frameXBasis * pixelWidth;
 
-        upperLeft = frameCenter;
-        upperLeft += frameYBasis * (height * 0.5);
-        upperLeft -= frameXBasis * (width * 0.5);
-        upperLeft += xStep * 0.5;
-        upperLeft += yStep * 0.5;
+        upperLeft =
+            // Start in the center of the frame
+            frameCenter
+            // Move to the upper left corner of the frame
+            + frameYBasis * (height * 0.5) - frameXBasis * (width * 0.5)
+            // Move to the center of the upper left pixel.
+            + xStep * 0.5 + yStep * 0.5;
     }
 
     public IEnumerable<Ray> Rays()
