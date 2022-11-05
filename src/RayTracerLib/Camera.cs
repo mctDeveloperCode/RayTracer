@@ -34,8 +34,8 @@ internal sealed class Camera
 
     private IEnumerable<Vector> PixelCenters()
     {
-        for (int x = 0; x < columns; x++)
-            for (int y = 0; y < rows; y++)
+        for (int y = 0; y < rows; y++)
+            for (int x = 0; x < columns; x++)
                 yield return xStep * x + yStep * y + upperLeft;
     }
 

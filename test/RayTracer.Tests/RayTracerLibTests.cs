@@ -1,5 +1,4 @@
 using Xunit;
-using System.Collections.Generic;
 
 namespace RayTracer.Tests;
 
@@ -28,26 +27,5 @@ public sealed class RayTracerLibTests
                 Assert.Equal(expectedColor, actualColor);
             }
         }
-    }
-
-    [Fact]
-    internal void ShouldCastSingleRayPerPixel()
-    {
-        // Point of view
-        Ray pov = new (Vector.Origin, Vector.XBasis);
-
-        // Frame
-        Vector up = new (1.0, 0.0, 1.0);
-        double width = 0.1;
-        double height = 0.1;
-        int rows = 1;
-        int columns = 1;
-
-        Camera camera = new (pov, up, width, height, rows, columns);
-
-        IEnumerable<Ray> expected = new Ray [] { new Ray(Vector.Origin, Vector.XBasis) };
-        IEnumerable<Ray> actual = camera.Rays();
-
-        MathAssert.Equal(expected, actual);
     }
 }
