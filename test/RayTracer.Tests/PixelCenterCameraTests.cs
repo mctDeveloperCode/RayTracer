@@ -7,13 +7,13 @@ public sealed class PixelCenterCameraTests
 {
     [Theory]
     [MemberData(nameof(PixelTestData))]
-    internal void PixelTest(int rows, int columns, double width, double height, IEnumerable<Ray> expected)
+    internal void PixelTest(int rows, int columns, double height, double width, IEnumerable<Ray> expected)
     {
         Camera camera = new (
             pointOfView: new Ray(focus, -Vector.ZBasis),
             frameUp: Vector.YBasis,
-            width: width,
             height: height,
+            width: width,
             rows: rows,
             columns: columns);
 
@@ -25,28 +25,32 @@ public sealed class PixelCenterCameraTests
     private static IEnumerable<object[]> PixelTestData() =>
         new object[][]
         {
-            expectedSquare1By1,
-            expectedSquare1By2,
-            expectedSquare2By1,
-            expectedSquare2By2,
+            square1By1Data,
+            square1By2Data,
+            square2By1Data,
+            square2By2Data,
+            tall1By1Data,
+            tall1By2Data,
+            tall2By1Data,
+            tall2By2Data,
         };
 
     private static Vector focus = new (0.0, 0.0, 1.0);
 
-    private static object[] expectedSquare1By1 =
+    private static object[] square1By1Data =
     {
         1, 1,      // rows, columns
-        0.2, 0.2,  // width, height
+        0.2, 0.2,  // height, width
         new Ray[]  // expected
         {
             new Ray(focus, -Vector.ZBasis)
         }
     };
 
-    private static object[] expectedSquare1By2 =
+    private static object[] square1By2Data =
     {
         1, 2,      // rows, columns
-        0.2, 0.2,  // width, height
+        0.2, 0.2,  // height, width
         new Ray[]  // expected
         {
             new Ray(focus, new Vector(-0.05, 0.0, -1.0)),
@@ -54,10 +58,10 @@ public sealed class PixelCenterCameraTests
         }
     };
 
-    private static object[] expectedSquare2By1 =
+    private static object[] square2By1Data =
     {
         2, 1,      // rows, columns
-        0.2, 0.2,  // width, height
+        0.2, 0.2,  // height, width
         new Ray[]  // expected
         {
             new Ray(focus, new Vector(0.0,  0.05, -1.0)),
@@ -65,16 +69,106 @@ public sealed class PixelCenterCameraTests
         }
     };
 
-    private static object[] expectedSquare2By2 =
+    private static object[] square2By2Data =
     {
         2, 2,      // rows, columns
-        0.2, 0.2,  // width, height
+        0.2, 0.2,  // height, width
         new Ray[]  // expected
         {
             new Ray(focus, new Vector(-0.05,  0.05, -1.0)),
             new Ray(focus, new Vector( 0.05,  0.05, -1.0)),
             new Ray(focus, new Vector(-0.05, -0.05, -1.0)),
             new Ray(focus, new Vector( 0.05, -0.05, -1.0))
+        }
+    };
+
+    private static object[] tall1By1Data =
+    {
+        1, 1,      // rows, columns
+        0.4, 0.2,  // height, width
+        new Ray[]  // expected
+        {
+            new Ray(focus, -Vector.ZBasis)
+        }
+    };
+
+    private static object[] tall1By2Data =
+    {
+        1, 2,      // rows, columns
+        0.4, 0.2,  // height, width
+        new Ray[]  // expected
+        {
+            new Ray(focus, new Vector(-0.05, 0.0, -1.0)),
+            new Ray(focus, new Vector( 0.05, 0.0, -1.0))
+        }
+    };
+
+    private static object[] tall2By1Data =
+    {
+        2, 1,      // rows, columns
+        0.4, 0.2,  // height, width
+        new Ray[]  // expected
+        {
+            new Ray(focus, new Vector(0.0,  0.1, -1.0)),
+            new Ray(focus, new Vector(0.0, -0.1, -1.0))
+        }
+    };
+
+    private static object[] tall2By2Data =
+    {
+        2, 2,      // rows, columns
+        0.4, 0.2,  // height, width
+        new Ray[]  // expected
+        {
+            new Ray(focus, new Vector(-0.05,  0.1, -1.0)),
+            new Ray(focus, new Vector( 0.05,  0.1, -1.0)),
+            new Ray(focus, new Vector(-0.05, -0.1, -1.0)),
+            new Ray(focus, new Vector( 0.05, -0.1, -1.0))
+        }
+    };
+
+    private static object[] wide1By1Data =
+    {
+        1, 1,      // rows, columns
+        0.2, 0.4,  // height, width
+        new Ray[]  // expected
+        {
+            new Ray(focus, -Vector.ZBasis)
+        }
+    };
+
+    private static object[] wide1By2Data =
+    {
+        1, 2,      // rows, columns
+        0.2, 0.4,  // height, width
+        new Ray[]  // expected
+        {
+            new Ray(focus, new Vector(-0.1, 0.0, -1.0)),
+            new Ray(focus, new Vector( 0.1, 0.0, -1.0))
+        }
+    };
+
+    private static object[] wide2By1Data =
+    {
+        2, 1,      // rows, columns
+        0.2, 0.4,  // height, width
+        new Ray[]  // expected
+        {
+            new Ray(focus, new Vector(0.0,  0.05, -1.0)),
+            new Ray(focus, new Vector(0.0, -0.05, -1.0))
+        }
+    };
+
+    private static object[] wide2By2Data =
+    {
+        2, 2,      // rows, columns
+        0.2, 0.4,  // height, width
+        new Ray[]  // expected
+        {
+            new Ray(focus, new Vector(-0.1,  0.05, -1.0)),
+            new Ray(focus, new Vector( 0.1,  0.05, -1.0)),
+            new Ray(focus, new Vector(-0.1, -0.05, -1.0)),
+            new Ray(focus, new Vector( 0.1, -0.05, -1.0))
         }
     };
 }

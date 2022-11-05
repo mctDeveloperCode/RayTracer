@@ -2,7 +2,7 @@ namespace RayTracer;
 
 internal sealed class Camera
 {
-    public Camera(Ray pointOfView, Vector frameUp, double width, double height, int rows, int columns)
+    public Camera(Ray pointOfView, Vector frameUp, double height, double width, int rows, int columns)
     {
         this.pointOfView = pointOfView;
 
